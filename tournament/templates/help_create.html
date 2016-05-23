@@ -1,0 +1,38 @@
+{# Copyright 2016, Paul Powell, All rights reserved. #}
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="font-weight:bold;">Creating Brackets</h2>
+<p>Create a new bracket by clicking the <b>Create Bracket</b> button.  This will use the
+default (recommended) settings.  If you want to customize how the bracket is generated, use
+the <b>Options</b> button.</p>
+
+<h3 style="font-weight:bold;">Creating with Options</h3>
+<p> When creating brackets using the <b>Options</b> button your choices are:
+<ul>
+    <li> Madness</li>
+    <li> Winner:</li>
+    <li> Second:</li>
+    <li> Algorithm:</li>
+</ul>
+
+<h4 style="font-weight:bold;">Madness</h4>
+Increasing the madness level of the tournament increases the entropy of the tournament. When
+a higher seed plays a lower seed, the chance the higher seed will upset the lower seed is
+is increated as the madness increates.  The default value of <b>one</b> generates the average amount of
+madness seen over the last 20 years (an average of 18 upsets per tournament).  As the madness number
+is adjusted, the number of upsets will go up or down accordingly.
+
+<h4 style="font-weight:bold;">Winner</h4>
+Force the selected team to win the tournament.  The software will run tournament simulations until
+the selected team is found to be the winner.
+
+<h4 style="font-weight:bold;">Second</h4>
+Force the selected team to be the runner-up.  The software will run tournament simulation until
+the selected team is found to be the runner-up.
+
+<h4 style="font-weight:bold;">Algorithm</h4>
+Use the selected algorithm to determine winners during tournament simulation.  The default <b>Seed Odds</b>
+is the only viable choice at the moment.  The alternative <b>Fifty Fifty</b> gives each team a 50% chance
+of winning any game, and is only used to demonstrate a pluggable algorithm interface.
+{% endblock %}
+

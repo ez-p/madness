@@ -1,0 +1,17 @@
+* Prettify login pages
+* Options
+** Verify options on options page
+* Add help
+* Put on GitHub
+* Add some javascript to avoid reloading pages
+* Print tourney to a file
+
+Done
+* Redo/prettify user interface (Boost??)
+* Add 'delete' button to delete a previously saved tourney
+* Show information like #upsets
+* Pretty formatting of tourney
+* Save complete tournament results to database
+* Display complete tournament results to user
+* Add 'save' button to tourney results, to selectively allow saving
+* Display all of user tournaments, allow to view one

@@ -1,0 +1,20 @@
+{# Copyright 2016, Paul Powell, All rights reserved. #}
+{% load dict_extras %}
+<br>
+<big><b>{{ region.name|capfirst }}</b></big><br>
+<table>
+<tr>
+   <!-- We use 'order' to ensure ordering of rounds printed -->
+   {% for index in p_order %}
+   {% with region.rounds|access:index as round%}
+   <td>
+       <table class="monotable">
+	 {% for match in round.matchup_set.all %}
+	 <tr><td><b>{{ match.winner }}</b><br>{{ match.loser }}</td></tr>
+	 {% endfor %}
+      </table>
+   </td>
+   {% endwith %}   
+   {% endfor %}
+</tr>
+</table>

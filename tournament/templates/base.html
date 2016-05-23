@@ -1,0 +1,59 @@
+<!-- Copyright 2016, Paul Powell, All rights reserved. -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  <!--
+  .monotable, .monotable th
+  {
+      font-family:courier;
+      font-size:10pt;
+      padding: 5px;
+  }
+
+  .monotable td
+  {
+      border: 1px solid #428bca;
+      background-color: #ecf3f9
+  }
+
+  .t_outer_table, .t_outer_table td
+  {
+      padding: 2px;
+  }
+  -->
+  </style>
+</head>
+<body>
+<body>
+    <nav class="navbar navbar=default">
+	<div class="container=fluid">
+	    <div class="navbar=header">
+		<a class="navbar-brand" href="/">Madness</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+		<li class="active"><a href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
+		{% if user.is_anonymous %}
+		<li><a href={% url 'django.contrib.auth.views.login' %}><span class="glyphicon glyphicon-user"> Login</span></a></li>
+		<li><a href={% url 'tournament.views.register' %}><span class="glyphicon glyphicon-log-in"> Register</span></a></li>
+        {% include "help_menu.html" %}
+		{% else %}
+		<li><a href="{% url 'django.contrib.auth.views.logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+		<li><a href="{% url 'my-brackets' %}"><span class="glyphicon glyphicon-list"> My Brackets</span></a></li>
+        {% include "help_menu.html" %}
+		{% endif %}
+	    </ul>
+	</div>
+    </nav>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>

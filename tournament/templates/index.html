@@ -1,0 +1,12 @@
+{# Copyright 2016, Paul Powell, All rights reserved. #}
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="panel panel-primary">
+    <div class="panel-heading">Press any button to create a {{ year }} bracket.</div>
+    <div class="panel-body">
+       <a class="btn btn-primary" href="/tournament/generate/" role="button">Create Bracket</a>
+       <a class="btn btn-primary" href={% url 'create-with-options' %} role="button">Options</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{# Copyright 2016, Paul Powell, All rights reserved. #}
+{% extends 'base.html' %}
+{% block content %}
+<h1>Tournament Results ({{ year }})</h1>
+<h2>Champion: {{ champion }}</h2>
+<p style="margin-left: 40px"><b>{{ champion }}</b> vs {{ 2nd_place }}</p>
+<h3>Final Four:</h3>
+<p style="margin-left: 40px"><b>{{ semi1.winner }}</b> vs {{ semi1.loser }}</p>
+<p style="margin-left: 40px"><b>{{ semi2.winner }}</b> vs {{ semi2.loser }}</p>
+<h4>South:</h4>
+<p style="margin-left: 40px"><b>{{ south.winner }}</b> vs {{ south.loser }}</p>
+<h4>East:</h4>
+<p style="margin-left: 40px"><b>{{ east.winner }}</b> vs {{ east.loser }}</p>
+<h4>West:</h4>
+<p style="margin-left: 40px"><b>{{ west.winner }}</b> vs {{ west.loser }}</p>
+<h4>Mid-West:</h4>
+<p style="margin-left: 40px"><b>{{ midwest.winner }}</b> vs {{ midwest.loser }}</p>
+{% if user.is_authenticated %}
+<form action={% url 'save-result' db_result %}>
+    <input type="submit" value="Save">
+</form>`
+{% endif %}
+</form>
+{% endblock %}

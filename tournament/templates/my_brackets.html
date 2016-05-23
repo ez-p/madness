@@ -1,0 +1,17 @@
+{# Copyright 2016, Paul Powell, All rights reserved. #}
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="panel panel-primary">
+    <div class="panel-heading">Your Brackets</div>
+    <div class="panel-body">
+	<div class="list-group">
+	{% for tourney in user.tournament_set.all %}
+	<a href="{% url 'view-result' tourney.id %}" style="padding: 2px 10px;" class="list-group-item"><b>[{{tourney.year}}] {{tourney.winner}}</b> vs {{tourney.runnerup}}</a><br>
+	{% endfor %}
+	</div>
+	<a class="btn btn-primary" href="/tournament/generate/" role="button">Create Bracket</a>
+        <a class="btn btn-primary" href={% url 'create-with-options' %} role="button">Options</a>
+    </div>
+</div>
+{% endblock %}
