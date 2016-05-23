@@ -1,0 +1,7 @@
+*.txt
+.gitignore
+.*.swp
+*.DS_Store
+*.py[cod]
+*.pdf
+_data.py
