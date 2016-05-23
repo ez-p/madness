@@ -4,4 +4,6 @@
 *.DS_Store
 *.py[cod]
 *.pdf
+madness/static/
+madness/staticfiles/
 _data.py
