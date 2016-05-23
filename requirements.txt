@@ -3,3 +3,4 @@ psycopg2==2.6.1
 django-extensions
 django-bootstrap3
 django-admin-bootstrapped
+whitenoise==2.0.6
