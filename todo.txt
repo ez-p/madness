@@ -1,3 +1,5 @@
+* Finish help text
+* Move Keep button to obvious place
 * Prettify login pages
 * Options
 ** Verify options on options page
