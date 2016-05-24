@@ -13,6 +13,13 @@ You can download and run this using standard Django manage.py runserver quick an
 
 ## Todo
 
+* Finish help text
+* Move Keep button to obvious place
+** In general, UI needs work
+* Make pretty login pages
+* Verify options are logical when creating using options
+* Add some javascript to avoid reloading pages
+* Print tourney to a file
 
 ## License
 
