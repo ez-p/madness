@@ -6,3 +6,4 @@
 *.pdf
 madness/staticfiles/
 _data.py
+db.sqlite3

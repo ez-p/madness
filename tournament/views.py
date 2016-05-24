@@ -127,7 +127,7 @@ def remove_result(request, result_id):
     _result.user = None
     _result.save()
 
-    return redirect('view-result', result_id=result_id)
+    return redirect('my-brackets')
 
 def _view_base_results(request, result_id):
     tourney = models.Tournament.objects.get(id=result_id)

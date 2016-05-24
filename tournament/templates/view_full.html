@@ -29,5 +29,8 @@
 </tr>
 </table>
 <br>
+{% if not is_saved %}
+    <a class="btn btn-primary" href={% url 'save-result' tourney.id %} role="button">Keep</a>
+{% endif %}
 <a class="btn btn-primary" href={% url 'view-result' tourney.id %} role="button">Hide Full</a>
 {% endblock %}

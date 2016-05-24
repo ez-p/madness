@@ -4,12 +4,7 @@
 <br>
 <div class="btn-group">
     <a class="btn btn-primary" href="/tournament/generate" role="button">Create Bracket</a>
-       <a class="btn btn-primary" href={% url 'create-with-options' %} role="button">Options</a>
-    {% if not is_saved %}
-    <a class="btn btn-primary" href={% url 'save-result' tourney.id %} role="button">Keep</a>
-    {% else %}
-    <a class="btn btn-primary" href={% url 'remove-result' tourney.id %} role="button">Remove</a>
-    {% endif %}
+    <a class="btn btn-primary" href={% url 'create-with-options' %} role="button">Options</a>
     {% if is_full %}
     <a class="btn btn-primary" href={% url 'view-result' tourney.id %} role="button">Hide Full</a>
     {% else %}

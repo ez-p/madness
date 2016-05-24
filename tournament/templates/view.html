@@ -5,5 +5,8 @@
 <big><strong>{{ region.name|capfirst }}: </strong></big>{{ region.loser}} vs <b>{{ region.winner}}</b><br>
 {% endfor %}
 <br>
+{% if not is_saved %}
+   <a class="btn btn-primary" href={% url 'save-result' tourney.id %} role="button">Keep</a>
+{% endif %}
 <a class="btn btn-primary" href={% url 'view-full-result' tourney.id %} role="button">Show Full</a>
 {% endblock %}

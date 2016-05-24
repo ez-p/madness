@@ -40,12 +40,16 @@
 		<li><a href={% url 'django.contrib.auth.views.login' %}><span class="glyphicon glyphicon-user"> Login</span></a></li>
 		<li><a href={% url 'tournament.views.register' %}><span class="glyphicon glyphicon-log-in"> Register</span></a></li>
         {% include "help_menu.html" %}
+		</ul>
 		{% else %}
 		<li><a href="{% url 'django.contrib.auth.views.logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
 		<li><a href="{% url 'my-brackets' %}"><span class="glyphicon glyphicon-list"> My Brackets</span></a></li>
         {% include "help_menu.html" %}
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+		    <li><a href="#">Blah</a></li>
+		</ul>
 		{% endif %}
-	    </ul>
 	</div>
     </nav>
     <div class="content container">
