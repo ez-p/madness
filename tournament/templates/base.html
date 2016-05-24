@@ -29,29 +29,35 @@
 </head>
 <body>
 <body>
-    <nav class="navbar navbar=default">
-	<div class="container=fluid">
-	    <div class="navbar=header">
-		<a class="navbar-brand" href="/">Madness</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-		<li class="active"><a href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
-		{% if user.is_anonymous %}
-		<li><a href={% url 'django.contrib.auth.views.login' %}><span class="glyphicon glyphicon-user"> Login</span></a></li>
-		<li><a href={% url 'tournament.views.register' %}><span class="glyphicon glyphicon-log-in"> Register</span></a></li>
-        {% include "help_menu.html" %}
+    <div class="content container">
+    <div class="row">
+    <div class="col-md-10">
+	<nav class="navbar navbar=default">
+	    <div class="container=fluid">
+		<div class="navbar=header">
+		    <a class="navbar-brand" href="/">Madness</a>
+		</div>
+		<ul class="nav navbar-nav">
+		    <li class="active"><a href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
+		    {% if user.is_anonymous %}
+		    <li><a href={% url 'django.contrib.auth.views.login' %}><span class="glyphicon glyphicon-user"> Login</span></a></li>
+		    <li><a href={% url 'tournament.views.register' %}><span class="glyphicon glyphicon-log-in"> Register</span></a></li>
+		    {% include "help_menu.html" %}
+		    </ul>
+		    {% else %}
+		    <li><a href="{% url 'my-brackets' %}"><span class="glyphicon glyphicon-list"> My Brackets</span></a></li>
+		    <li><a href="{% url 'django.contrib.auth.views.logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+		    {% include "help_menu.html" %}
+		    {% endif %}
 		</ul>
-		{% else %}
-		<li><a href="{% url 'django.contrib.auth.views.logout' %}"><span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
-		<li><a href="{% url 'my-brackets' %}"><span class="glyphicon glyphicon-list"> My Brackets</span></a></li>
-        {% include "help_menu.html" %}
-		</ul>
+		{% if not user.is_anonymous %}
 		<ul class="nav navbar-nav navbar-right">
-		    <li><a href="#">Blah</a></li>
+		    <li><a href="{% url 'my-brackets' %}"><span class="glyphicon glyphicon-user"> {{user.username|capfirst}}</span></a></li>
 		</ul>
 		{% endif %}
-	</div>
-    </nav>
+	    </div>
+	</nav>
+    </div>
     <div class="content container">
         <div class="row">
             <div class="col-md-8">

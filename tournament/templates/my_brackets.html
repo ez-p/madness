@@ -11,8 +11,8 @@
 	<a href={% url 'remove-result' tourney.id %}><span class="glyphicon glyphicon-trash"></span></a><br>
 	{% endfor %}
 	</div>
-	<a class="btn btn-primary" href="/tournament/generate/" role="button">Create Bracket</a>
-        <a class="btn btn-primary" href={% url 'create-with-options' %} role="button">Options</a>
     </div>
 </div>
+<a class="btn btn-primary" href="/tournament/generate/" role="button">Create Bracket</a>
+<a class="btn btn-primary" href={% url 'create-with-options' %} role="button">Options</a>
 {% endblock %}
