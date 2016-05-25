@@ -4,13 +4,20 @@ Copyright 2016, Paul Powell, All rights reserved.
 from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.conf import settings
+import django.views.generic as generic
 
 import tournament.engine.tourney as tourney
-from tournament.forms import UserForm, OptionsForm
+from tournament.forms import UserForm, OptionsForm, RegistrationForm 
 import tournament.models as models
 from tournament.engine.algorithms.seedodds import SeedOddsMatchup as algorithm
+
+class RegisterView(generic.CreateView):
+    form_class = RegistrationForm 
+    model = User
+    template_name = 'registration/register.html'
 
 def _save_region_rounds(eng_results, region):
     year = models.Year.objects.get(year=eng_results['year'])

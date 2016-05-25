@@ -21,6 +21,8 @@ ALLOWED_HOSTS = []
 
 DEFAULT_YEAR = '2016'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -33,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'tournament',
+    'crispy_forms',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -28,7 +28,6 @@
   </style>
 </head>
 <body>
-<body>
     <div class="content container">
     <div class="row">
     <div class="col-md-10">
@@ -41,7 +40,7 @@
 		    <li class="active"><a href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
 		    {% if user.is_anonymous %}
 		    <li><a href={% url 'django.contrib.auth.views.login' %}><span class="glyphicon glyphicon-user"> Login</span></a></li>
-		    <li><a href={% url 'tournament.views.register' %}><span class="glyphicon glyphicon-log-in"> Register</span></a></li>
+		    <li><a href={% url 'register' %}><span class="glyphicon glyphicon-log-in"> Register</span></a></li>
 		    {% include "help_menu.html" %}
 		    </ul>
 		    {% else %}

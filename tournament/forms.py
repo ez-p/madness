@@ -2,8 +2,12 @@
 Copyright 2016, Paul Powell, All rights reserved.
 """
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.conf import settings
 from django import forms
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, ButtonHolder, Submit
 
 import tournament.models as models
 
@@ -21,6 +25,20 @@ class OptionsForm(forms.ModelForm):
     class Meta:
         model = models.Options
         fields = ('madness', 'winner', 'second', 'algorithm')
+
+class RegistrationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'username',
+            'password1',
+            'password2',
+            ButtonHolder(
+                Submit('register', 'Register', css_class='btn-primary')
+            )
+        )
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
