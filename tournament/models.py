@@ -22,6 +22,9 @@ class RegionData(models.Model):
     exclusive = models.ForeignKey('self', related_name='my_exclusive', null=True)
     year = models.ForeignKey(Year)
 
+    def __unicode__(self):
+        return "({}) {}".format(self.year.year, self.name)
+
 # Represent a team in the tournament
 class Team(models.Model):
     year = models.ForeignKey(Year)
@@ -31,7 +34,7 @@ class Team(models.Model):
     power = models.IntegerField(default=0)
 
     def __str__(self):
-        return "{}({})".format(self.name, self.seed)
+        return "({}) {}[{}]".format(self.year.year, self.name, self.seed)
 
 class Algorithm(models.Model):
     name = models.CharField(max_length=128)
@@ -60,9 +63,15 @@ class Tournament(models.Model):
     upsets = models.IntegerField(default=0)
     options = models.ForeignKey(Options)
 
+    def __unicode__(self):
+        return "({}) vs {}".format(self.winner, self.runnerup)
+
 class Region(models.Model):
     name = models.CharField(max_length=32)
     tournament = models.ForeignKey(Tournament)
+
+    def __unicode__(self):
+        return "({}) {}".format(self.tournament.year.year, self.name)
     
     @property
     def winner(self):
