@@ -1,5 +1,8 @@
 {# Copyright 2016, Paul Powell, All rights reserved. #}
 {% extends 'base.html' %}
 {% block content %}
-<p>Show</p>
+<h2 style="font-weight:bold;">Viewing Brackets</h2>
+<p>You can view your saved brackets using the using the <a href={% url 'my-brackets' %}>My Brackets</a> page.
+<h3 style="font-weight:bold;">Deleting Brackets</h2>
+<p>Also on the <a href={% url 'my-brackets' %}>My Brackets</a> page you have the option of deleting saved brackets using the trashcan icon.
 {% endblock %}
