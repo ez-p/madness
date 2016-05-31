@@ -5,12 +5,14 @@ from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from django.template import RequestContext
 from django.conf import settings
+from django.core.urlresolvers import reverse_lazy
 import django.views.generic as generic
 
 import tournament.engine.tourney as tourney
-from tournament.forms import UserForm, OptionsForm, RegistrationForm 
+from tournament.forms import UserForm, OptionsForm, RegistrationForm, LoginForm
 import tournament.models as models
 from tournament.engine.algorithms.seedodds import SeedOddsMatchup as algorithm
 
@@ -18,6 +20,22 @@ class RegisterView(generic.CreateView):
     form_class = RegistrationForm 
     model = User
     template_name = 'registration/register.html'
+
+class LoginView(generic.FormView):
+    form_class = LoginForm
+    success_url = reverse_lazy('home-page')
+    template_name = 'registration/login.html'
+
+    def form_valid(self,form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None and user.is_active:
+            login(self.request, user)
+            return super(LoginView, self).form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 def _save_region_rounds(eng_results, region):
     year = models.Year.objects.get(year=eng_results['year'])
@@ -173,38 +191,6 @@ def view_full_result(request, result_id):
 def my_brackets(request):
     context = {'user':request.user}
     return render(request, 'my_brackets.html', context)
-
-def register(request):
-    context = RequestContext(request)
-    registered = False
-
-    if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        user_form = UserForm(data=request.POST)
-
-        if user_form.is_valid():
-            # Save the user's form data to the database.
-            user = user_form.save()
-
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
-            user.set_password(user.password)
-            user.save()
-
-            # Update our variable to tell the template registration was successful.
-            registered = True
-
-        # Invalid form or forms - mistakes or something else?
-        # Print problems to the terminal.
-        # They'll also be shown to the user.
-        else:
-            print user_form.errors
-    else:
-        user_form = UserForm()
-
-    out = {'user_form': user_form, 'registered': registered}
-
-    return render_to_response('registration/register.html', out, context)
 
 def create_with_options(request):
     if request.method == "POST":
