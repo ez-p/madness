@@ -181,10 +181,26 @@ def view_result(request, result_id):
 
 def view_full_result(request, result_id):
     results = _view_base_results(request, result_id)
+
+    t = results['tourney']
+    year = t.year
+
     results['is_full'] = True 
     # Specify order the rounds are printed in the full tourney view
     results['order'] = [8,4,2,1]
     results['r_order'] = list(reversed(results['order']))
+
+    semi1_regions = []
+    semi1_regions.append(results['semi1'].winner.region.name)
+    semi1_regions.append(results['semi1'].loser.region.name)
+    results['semi1_regions'] = (t.region_set.get(name=semi1_regions[0]),
+                                t.region_set.get(name=semi1_regions[1]))
+
+    semi2_regions = []
+    semi2_regions.append(results['semi2'].winner.region.name)
+    semi2_regions.append(results['semi2'].loser.region.name)
+    results['semi2_regions'] = (t.region_set.get(name=semi2_regions[0]),
+                                t.region_set.get(name=semi2_regions[1]))
     return render(request, 'view_full.html', results)
 
 @login_required

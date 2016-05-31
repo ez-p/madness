@@ -3,24 +3,24 @@
 {% block show_tourney %}
 <table class="t_outer_table"> 
 <tr>
-{% with tourney.region_set.all.0 as region %}
+{% with semi1_regions.0 as region %}
    {% with order as p_order %}
       <td>{% include "pp_round.html" %}</td>
    {% endwith %}
 {% endwith %}
-{% with tourney.region_set.all.1 as region %}
+{% with semi1_regions.1 as region %}
    {% with r_order as p_order %}
       <td align="right">{% include "pp_round.html" %}</td>
    {% endwith %}
 {% endwith %}
 </tr>
 <tr>
-{% with tourney.region_set.all.2 as region %}
+{% with semi2_regions.0 as region %}
    {% with order as p_order %}
       <td>{% include "pp_round.html" %}</td>
    {% endwith %}
 {% endwith %}
-{% with tourney.region_set.all.3 as region %}
+{% with semi2_regions.1 as region %}
    {% with r_order as p_order %}
       <td align="right">{% include "pp_round.html" %}</td>
    {% endwith %}

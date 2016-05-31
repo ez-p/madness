@@ -96,7 +96,6 @@ class Region(models.Model):
             rnds[round.matchup_set.all().count()] = round
         return rnds
 
-
 class Round(models.Model):
     region = models.ForeignKey(Region)
 
