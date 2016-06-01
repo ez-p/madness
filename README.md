@@ -13,14 +13,13 @@ You can download and run this using standard Django manage.py runserver quick an
 
 ## Todo
 
-* Finish help text
 * Create a user profile page
-* Make pretty login pages
 * Verify options are logical when creating using options
   * Don't let user manually select a team with a very low seed - takes forever
   * Verify mutually exclusive teams
 * Add some javascript to avoid reloading pages
 * Print tourney to a file
+* Add caching
 
 ## License
 

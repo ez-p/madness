@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', LoginView.as_view(), name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page':'/'}),
-    url(r'^accounts/register/$', RegisterView.as_view(success_url="/accounts/login"), name='register'),
+    url(r'^accounts/register/$', RegisterView.as_view(), name='register'),
     url(r'^$', home_page, name='home-page'),
     url(r'^tournament/generate/$', run_tournament, name='run-tournament'),
     url(r'^tournament/generate/(?P<option_id>[0-9]+)/$', run_tournament_options, name='run-tournament-options'),

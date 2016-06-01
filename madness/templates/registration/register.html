@@ -5,18 +5,9 @@
 <h1>Register a New User Account</h1>
 
 {% load crispy_forms_tags %}
-{% if registered %}
-    <strong>Thank you for registering!</strong><br>
-    <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
-{% else %}
-   <div class="col-md-5">
-	{% crispy form %}
-	{% csrf_token %}
 
-	<!-- Display each form. The as_p method wraps each element in a paragraph
-	     (<p>) element. This ensures each element appears on a new line,
-	     making everything look neater. -->
-	{{ user_form.as_p }}
-    </div>
-{% endif %}
+<div class="col-md-5">
+{% crispy form %}
+</div>
+
 {% endblock content %}

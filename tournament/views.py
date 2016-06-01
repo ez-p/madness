@@ -19,7 +19,18 @@ from tournament.engine.algorithms.seedodds import SeedOddsMatchup as algorithm
 class RegisterView(generic.CreateView):
     form_class = RegistrationForm 
     model = User
+    success_url = reverse_lazy('home-page')
     template_name = 'registration/register.html'
+
+    def form_valid(self,form):
+        form.save()
+        #import pdb; pdb.set_trace()
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password1']
+        user = authenticate(username=username, password=password)
+        # This should log in the user but it doesn't???
+        login(self.request, user)
+        return super(RegisterView, self).form_valid(form)
 
 class LoginView(generic.FormView):
     form_class = LoginForm
@@ -101,6 +112,7 @@ def _save_tournament(eng_results, option_id=None):
     return tourney.id
 
 def home_page(request):
+    #import pdb; pdb.set_trace()
     year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
     context = {'year':year.year}
     return render(request, 'index.html', context)
