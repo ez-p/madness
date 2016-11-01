@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^tournament/(?P<result_id>[0-9]+)/save$', save_result, name='save-result'),
     url(r'^tournament/(?P<result_id>[0-9]+)/remove$', remove_result, name='remove-result'),
     url(r'^tournament/(?P<result_id>[0-9]+)/full$', view_full_result, name='view-full-result'),
+    url(r'^tournament/(?P<result_id>[0-9]+)/print$', print_bracket, name='print-bracket'),
     url(r'^tournament/brackets', my_brackets, name='my-brackets'),
     url(r'^tournament/help/introduction', help_introduction, name='help-introduction'),
     url(r'^tournament/help/create', help_create, name='help-create'),

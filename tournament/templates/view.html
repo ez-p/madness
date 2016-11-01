@@ -14,4 +14,5 @@
    <a class="btn btn-primary" href={% url 'save-result' tourney.id %} role="button">Keep</a>
 {% endif %}
 <a class="btn btn-primary" href={% url 'view-full-result' tourney.id %} role="button">Show Full</a>
+<a class="btn btn-primary" href={% url 'print-bracket' tourney.id %} role="button">Print</a>
 {% endblock %}
