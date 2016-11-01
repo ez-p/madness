@@ -224,7 +224,7 @@ def create_with_options(request):
     if request.method == "POST":
         form = OptionsForm(request.POST)
         if not form.is_valid():
-            pass
+            return render(request, 'options.html', {'form':form})
         options = form.save()
         return redirect('run-tournament-options', option_id=options.id)
     else:

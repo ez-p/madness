@@ -5,7 +5,7 @@
     <div class="panel-heading">Region Results</div>
     <div class="panel-body">
     {% for region in tourney.region_set.all %}
-       <big><strong>{{ region.name|capfirst }}: </strong></big>{{ region.loser}} vs <b>{{ region.winner}}</b><br>
+       <big><strong>{{ region.name|capfirst }}: </strong></big>{{ region.loser.str_name_seed}} vs <b>{{ region.winner.str_name_seed}}</b><br>
     {% endfor %}
     </div>
     </div>

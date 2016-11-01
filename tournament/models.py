@@ -23,7 +23,7 @@ class RegionData(models.Model):
     year = models.ForeignKey(Year)
 
     def __unicode__(self):
-        return "({}) {}".format(self.year.year, self.name)
+        return "{} {}".format(self.year.year, self.name.capitalize())
 
 # Represent a team in the tournament
 class Team(models.Model):
@@ -32,9 +32,12 @@ class Team(models.Model):
     name = models.CharField(max_length=128)
     seed = models.IntegerField()
     power = models.IntegerField(default=0)
+    
+    def str_name_seed(self):
+        return "{} [{}]".format(self.name, self.seed)
 
     def __str__(self):
-        return "({}) {}[{}]".format(self.year.year, self.name, self.seed)
+        return "({}) {} [{}]".format(self.region, self.name, self.seed)
 
 class Algorithm(models.Model):
     name = models.CharField(max_length=128)

@@ -10,7 +10,7 @@
    <td>
        <table class="monotable">
 	 {% for match in round.matchup_set.all %}
-	 <tr><td><b>{{ match.winner }}</b><br>{{ match.loser }}</td></tr>
+	 <tr><td><b>{{match.winner.name}}[{{match.winner.seed}}]</b><br>{{ match.loser.name }}[{{match.loser.seed}}]</td></tr>
 	 {% endfor %}
       </table>
    </td>

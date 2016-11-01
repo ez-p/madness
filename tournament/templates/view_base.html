@@ -17,11 +17,11 @@
     <div class="panel-heading">Tournament Results ({{ tourney.year.year }})</div>
     <div class="panel-body">
     Number of Upsets: {{ tourney.upsets }} (Average: 18)<br>
-    <h2>Champion: {{ tourney.winner }}</h2>
-    <p style="margin-left: 40px"><b>{{ tourney.winner }}</b> vs {{ tourney.runnerup}}</p>
+    <h2>Champion: {{ tourney.winner.str_name_seed }}</h2>
+    <p style="margin-left: 40px"><b>{{ tourney.winner.str_name_seed }}</b> vs {{ tourney.runnerup.str_name_seed}}</p>
     <h3>Final Four:</h3>
-    <p style="margin-left: 40px"><b>{{ semi1.winner }}</b> vs {{ semi1.loser }}</p>
-    <p style="margin-left: 40px"><b>{{ semi2.winner }}</b> vs {{ semi2.loser }}</p>
+    <p style="margin-left: 40px"><b>{{ semi1.winner.str_name_seed }}</b> vs {{ semi1.loser.str_name_seed }}</p>
+    <p style="margin-left: 40px"><b>{{ semi2.winner.str_name_seed }}</b> vs {{ semi2.loser.str_name_seed }}</p>
     </div>
 </div>
 {% block show_tourney %}
