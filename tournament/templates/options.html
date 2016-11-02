@@ -1,6 +1,8 @@
 {# Copyright 2016, Paul Powell, All rights reserved. #}
 {% extends 'base.html' %}
 {% block content %}
+<h1>Year: {{ year }}</h1>
+<h4>Switch to: <a href={% url 'create-with-options' %}>2016</a></h4>
 <div class="panel panel-primary">
 <div class="panel-body">
     <form method="POST" class="post-form">
@@ -10,7 +12,7 @@
     {% endfor %}
 	{% for field in form %}
 	<div class="form-group">
-	    <lablel>{{field.label|capfirst}}:</label>
+	    <label>{{field.label|capfirst}}:</label>
 	    {{ field }}
 	</div>
 	{% endfor %}

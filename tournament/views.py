@@ -220,19 +220,26 @@ def my_brackets(request):
     context = {'user':request.user}
     return render(request, 'my_brackets.html', context)
 
-def create_with_options(request):
+def _create_with_options_impl(request, year):
     if request.method == "POST":
-        form = OptionsForm(request.POST)
+        form = OptionsForm(request.POST, year=year)
         if not form.is_valid():
             return render(request, 'options.html', {'form':form})
         options = form.save()
         return redirect('run-tournament-options', option_id=options.id)
     else:
-        year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
         algorithm = models.Algorithm.objects.get(name="Seed Odds")
         initial={'algorithm':algorithm, 'year':year}
-        form = OptionsForm(initial=initial)
-        return render(request, 'options.html', {'form':form})
+        form = OptionsForm(initial=initial, year=year)
+        return render(request, 'options.html', {'form':form, 'year':year})
+
+def create_with_options(request):
+    year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
+    return _create_with_options_impl(request, year)
+
+def create_with_options_2015(request):
+    year = models.Year.objects.get(year='2015')
+    return _create_with_options_impl(request, year)
 
 def help_introduction(request):
     return render(request, 'help_intro.html')

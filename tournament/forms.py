@@ -14,12 +14,14 @@ import tournament.engine.data as data
 
 class OptionsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        year = kwargs.pop('year')
         super(OptionsForm, self).__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({'class':'form-control'})
 
+        #import pdb; pdb.set_trace()
         # HACK eventually year should be a selectable option
-        self.year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
+        self.year = models.Year.objects.get(year=year)
         teams = models.Team.objects.filter(year=self.year)
         self.fields['winner'].queryset = teams.order_by('region', 'name')
         self.fields['second'].queryset = teams.order_by('region', 'name')

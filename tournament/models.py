@@ -49,6 +49,7 @@ class Algorithm(models.Model):
 ## Dynamic data produced by tournament simulation
 ## **********************************************
 class Options(models.Model):
+    year = models.ForeignKey(Year, blank=False, default='')
     madness = models.IntegerField(default=1)
     winner = models.ForeignKey(Team, blank=True, null=True, related_name="winner")
     second = models.ForeignKey(Team, blank=True, null=True, related_name="second")
