@@ -111,14 +111,23 @@ def _save_tournament(eng_results, option_id=None):
 
     return tourney.id
 
+def _get_default_year(request):
+    year = None
+    year_cookie = request.COOKIES.get('year')
+    if not year_cookie:
+        return models.Year.objects.get(year=settings.DEFAULT_YEAR)
+    else:
+        return models.Year.objects.get(year=year_cookie)
+
 def home_page(request):
-    year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
+    year = _get_default_year(request)
     context = {'year':year.year}
     return render(request, 'index.html', context)
 
 def run_tournament(request):
     # Engine generated tournament object (not from models.py)
-    t = tourney.Tournament(settings.DEFAULT_YEAR, None, None, 1, algorithm)
+    year_s = str(_get_default_year(request))
+    t = tourney.Tournament(year_s, None, None, 1, algorithm)
     _results = t()
 
     # Store the resuls in the database
@@ -234,12 +243,14 @@ def _create_with_options_impl(request, year):
         return render(request, 'options.html', {'form':form, 'year':year, 'years':years})
 
 def create_with_options(request):
-    year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
+    year = _get_default_year(request)
     return _create_with_options_impl(request, year)
 
 def create_with_options_year(request, year):
     year = models.Year.objects.get(year=year)
-    return _create_with_options_impl(request, year)
+    rsp =_create_with_options_impl(request, year)
+    rsp.set_cookie('year',year.year)
+    return rsp
 
 def help_introduction(request):
     return render(request, 'help_intro.html')
