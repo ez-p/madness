@@ -7,7 +7,7 @@
     <div class="panel-body">
 	<div class="list-group">
 	{% for tourney in user.tournament_set.all %}
-	<a href="{% url 'view-result' tourney.id %}" style="padding: 2px 10px;"><b>[{{tourney.year}}] {{tourney.winner}}</b> vs {{tourney.runnerup}}</a>
+	<a href="{% url 'view-result' tourney.id %}" style="padding: 2px 10px;"><b>[{{tourney.year}}] {{tourney.winner.str_name_seed}}</b> vs {{tourney.runnerup.str_name_seed}}</a>
 	<a href={% url 'remove-result' tourney.id %}><span class="glyphicon glyphicon-trash"></span></a><br>
 	{% endfor %}
 	</div>
