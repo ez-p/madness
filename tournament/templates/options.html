@@ -1,24 +1,30 @@
 {# Copyright 2016, Paul Powell, All rights reserved. #}
 {% extends 'base.html' %}
 {% block content %}
-<h1>Year: {{ year }}</h1>
-<h4>Switch to: <a href={% url 'create-with-options' %}>2016</a></h4>
 <div class="panel panel-primary">
-<div class="panel-body">
-    <form method="POST" class="post-form">
-	{% csrf_token %}
-    {% for e in form.non_field_errors %}
-       <div class="alert alert-danger">{{ e }}</div>
-    {% endfor %}
-	{% for field in form %}
-	<div class="form-group">
-	    <label>{{field.label|capfirst}}:</label>
-	    {{ field }}
-	</div>
+    <div class="panel-heading">{{ year }} Tournament</div>
+    <div class="panel-body">
+	<form method="POST" class="post-form">
+	    {% csrf_token %}
+	{% for e in form.non_field_errors %}
+	   <div class="alert alert-danger">{{ e }}</div>
 	{% endfor %}
-	<button type="submit" class="btn btn-primary">Create Bracket</button>
-    </form>
+	    {% for field in form %}
+	    <div class="form-group">
+		<label>{{field.label|capfirst}}:</label>
+		{{ field }}
+	    </div>
+	    {% endfor %}
+	    <button type="submit" class="btn btn-primary">Create Bracket</button>
+	</form>
+    </div>
 </div>
+<div class="well">Switch years:
+   {% for y in years %}
+      {% if y.year != year.year %}
+         <a href={% url 'create-with-options-year' year=y.year%}>{{ y.year }}</a>
+      {% endif %}
+   {% endfor %}
 </div>
 <br>
 {% endblock %}

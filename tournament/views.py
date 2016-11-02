@@ -24,7 +24,6 @@ class RegisterView(generic.CreateView):
 
     def form_valid(self,form):
         form.save()
-        #import pdb; pdb.set_trace()
         username = form.cleaned_data['username']
         password = form.cleaned_data['password1']
         user = authenticate(username=username, password=password)
@@ -71,6 +70,7 @@ def _save_tournament(eng_results, option_id=None):
         algorithm = models.Algorithm.objects.get(name="Seed Odds")
         options = models.Options()
         options.algorithm = algorithm
+        options.year = year
         options.save()
     else:
         options = models.Options.objects.get(id=option_id)
@@ -112,7 +112,6 @@ def _save_tournament(eng_results, option_id=None):
     return tourney.id
 
 def home_page(request):
-    #import pdb; pdb.set_trace()
     year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
     context = {'year':year.year}
     return render(request, 'index.html', context)
@@ -143,7 +142,7 @@ def run_tournament_options(request, option_id):
     if options.algorithm.name == "Fifty Fifty":
         from tournament.engine.algorithms.fiftyfifty import FiftyFifty as algorithm
     # Engine generated tournament object (not from models.py)
-    t = tourney.Tournament(settings.DEFAULT_YEAR, winner_name, second_name, options.madness, algorithm)
+    t = tourney.Tournament(options.year, winner_name, second_name, options.madness, algorithm)
     _results = t()
 
     # Store the resuls in the database
@@ -221,24 +220,25 @@ def my_brackets(request):
     return render(request, 'my_brackets.html', context)
 
 def _create_with_options_impl(request, year):
+    years = models.Year.objects.all()
     if request.method == "POST":
         form = OptionsForm(request.POST, year=year)
         if not form.is_valid():
-            return render(request, 'options.html', {'form':form})
+            return render(request, 'options.html', {'form':form, 'years':years})
         options = form.save()
         return redirect('run-tournament-options', option_id=options.id)
     else:
         algorithm = models.Algorithm.objects.get(name="Seed Odds")
         initial={'algorithm':algorithm, 'year':year}
         form = OptionsForm(initial=initial, year=year)
-        return render(request, 'options.html', {'form':form, 'year':year})
+        return render(request, 'options.html', {'form':form, 'year':year, 'years':years})
 
 def create_with_options(request):
     year = models.Year.objects.get(year=settings.DEFAULT_YEAR)
     return _create_with_options_impl(request, year)
 
-def create_with_options_2015(request):
-    year = models.Year.objects.get(year='2015')
+def create_with_options_year(request, year):
+    year = models.Year.objects.get(year=year)
     return _create_with_options_impl(request, year)
 
 def help_introduction(request):

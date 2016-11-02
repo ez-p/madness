@@ -19,12 +19,11 @@ class OptionsForm(forms.ModelForm):
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({'class':'form-control'})
 
-        #import pdb; pdb.set_trace()
-        # HACK eventually year should be a selectable option
         self.year = models.Year.objects.get(year=year)
         teams = models.Team.objects.filter(year=self.year)
         self.fields['winner'].queryset = teams.order_by('region', 'name')
         self.fields['second'].queryset = teams.order_by('region', 'name')
+        self.fields['year'].widget.attrs['readonly'] = True
     
     def _find_region(self, year, name):
         all_regions_cache = data.all_regions(year)
@@ -63,7 +62,7 @@ class OptionsForm(forms.ModelForm):
 
     class Meta:
         model = models.Options
-        fields = ('madness', 'winner', 'second', 'algorithm')
+        fields = ('year', 'madness', 'winner', 'second', 'algorithm')
 
 class RegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
