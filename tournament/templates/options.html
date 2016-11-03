@@ -11,8 +11,10 @@
 	{% endfor %}
 	    {% for field in form %}
 	    <div class="form-group">
-		<label>{{field.label|capfirst}}:</label>
-		{{ field }}
+        {% if field.label != "Year" %}
+            <label>{{field.label|capfirst}}:</label>
+        {% endif %}
+        {{ field }}
 	    </div>
 	    {% endfor %}
 	    <button type="submit" class="btn btn-primary">Create Bracket</button>

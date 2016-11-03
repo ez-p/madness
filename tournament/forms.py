@@ -23,7 +23,6 @@ class OptionsForm(forms.ModelForm):
         teams = models.Team.objects.filter(year=self.year)
         self.fields['winner'].queryset = teams.order_by('region', 'name')
         self.fields['second'].queryset = teams.order_by('region', 'name')
-        self.fields['year'].widget.attrs['readonly'] = True
     
     def _find_region(self, year, name):
         all_regions_cache = data.all_regions(year)
@@ -63,6 +62,10 @@ class OptionsForm(forms.ModelForm):
     class Meta:
         model = models.Options
         fields = ('year', 'madness', 'winner', 'second', 'algorithm')
+        widgets = {
+            'year':forms.HiddenInput()
+        }
+
 
 class RegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
