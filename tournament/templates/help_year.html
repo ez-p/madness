@@ -1,0 +1,10 @@
+{# Copyright 2016, Paul Powell, All rights reserved. #}
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<h2 style="font-weight:bold;">Choosing the Year</h2>
+<p>By default the web application uses the current year.  If you would like to create brackets for a previous year you can select a different year on the <a href={% url 'create-with-options' %}>Options</a> page.  At the bottom of the <a href={% url 'create-with-options' %}>Options</a> next to the text "Switch years", choose a different year.
+<img src="{% static 'tournament/change_year2.png' %}" />
+<h3 style="font-weight:bold;">Cookies</h2>
+<p>If you allow cookies, once you select a specific year that year will remain selected until a different year is selected.</p>
+{% endblock %}

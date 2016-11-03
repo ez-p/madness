@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^tournament/help/create', help_create, name='help-create'),
     url(r'^tournament/help/save', help_save, name='help-save'),
     url(r'^tournament/help/show', help_show, name='help-show'),
+    url(r'^tournament/help/year', help_year, name='help-year'),
 ]

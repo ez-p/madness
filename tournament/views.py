@@ -264,5 +264,8 @@ def help_create(request):
 def help_show(request):
     return render(request, 'help_show.html')
 
+def help_year(request):
+    return render(request, 'help_year.html')
+
 def print_bracket(request):
     return render(request, 'ok')
