@@ -1,6 +1,8 @@
 """
 Copyright 2016, Paul Powell, All rights reserved.
 """
+import hashlib
+
 from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -23,12 +25,16 @@ class RegisterView(generic.CreateView):
     template_name = 'registration/register.html'
 
     def form_valid(self,form):
-        form.save()
         username = form.cleaned_data['username']
         password = form.cleaned_data['password1']
+        hashed_pw = hashlib.md5(password).hexdigest()
+
+        User.objects.get_or_create(username=username, defaults={'password':hashed_pw, 'is_active':True})
+
         user = authenticate(username=username, password=password)
-        # This should log in the user but it doesn't???
-        login(self.request, user)
+        if user:
+            login(self.request, user)
+            return HttpResponseRedirect('/')
         return super(RegisterView, self).form_valid(form)
 
 class LoginView(generic.FormView):
