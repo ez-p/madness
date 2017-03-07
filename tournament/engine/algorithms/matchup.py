@@ -29,6 +29,17 @@ class Matchup:
     def __repr__(self):
         return "[{}] vs {}".format(self.winner, self.loser)
 
+    @staticmethod
+    def base_play(team1, team2):
+        # Check the second/first flag. If set, then user has preselected who
+        # they want to get first or second, so just return that result.
+        if  team1['sf'] != 1 or team2['sf'] != 1:
+            if team1['sf'] > team2['sf']:
+                return (True, team1['team'], team2['team'])
+            elif team2['sf'] > team1['sf']:
+                return (True, team2['team'], team1['team'])
+        return (False, None, None)
+
     @abc.abstractmethod
     def _play(self, madness):
         #

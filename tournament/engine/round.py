@@ -25,7 +25,9 @@ class Round:
             match1 = self.algorithm(game[0], self.madness)
             match2 = self.algorithm(game[1], self.madness)
             # Add a tuple representing next matchup
-            nextup.append((match1()[0], match2()[0]))
+            m1 = match1()[0]
+            m2 = match2()[0]
+            nextup.append((m1,m2))
             self.results.append(match1)
             self.results.append(match2)
         

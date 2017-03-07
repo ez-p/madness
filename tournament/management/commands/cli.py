@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 
 import sys
+import time
 
 import tournament.engine.data as data
 from tournament.engine.tourney import *
@@ -92,7 +93,7 @@ def possible_matchup(year, winner, second):
         print "Selected teams are in the same region {}".format(d)
         return False
 
-    if data.exclusives()[w_region] == s_region:
+    if data.exclusives(year)[w_region] == s_region:
         d = "({}, {})".format(w_region.capitalize(), s_region.capitalize())
         print "Selected team regions are mutually exclusive {}".format(d)
         return False
@@ -229,7 +230,9 @@ class Command(BaseCommand):
             sys.exit(0)
 
         tourney = Tournament(year, winner, second, madness, engine)
+        start = time.time()
         results = tourney()
+        print "Execution time: {}".format(time.time() - start)
 
         printer = Printer(tourney, options['file'])
         printer.print_to_file()

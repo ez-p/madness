@@ -54,9 +54,11 @@ class SeedOddsMatchup(Matchup):
         # Keep track of a "madness seed" that we can adjust using
         # the madness level.
         self.team1 = {'team':teams[0],
-                      'mad_seed':teams[0].seed}
+                      'mad_seed':teams[0].seed,
+                      'sf':teams[0].sf}
         self.team2 = {'team':teams[1],
-                      'mad_seed':teams[1].seed}
+                      'mad_seed':teams[1].seed,
+                      'sf':teams[1].sf}
 
         # Adjust a teams seed based on power rating
         # Since we don't want negative numbers, we adjust opponents seed up
@@ -83,6 +85,13 @@ class SeedOddsMatchup(Matchup):
         return (winner, loser)
 
     def _play(self, madness):
+        # See if superclass wants to handle the matchup
+        status, self.winner, self.loser = Matchup.base_play(self.team1,
+                                                            self.team2)
+        if status:
+            # Superclass handled the matchup
+            return (self.winner, self.loser)
+
         # High seed is seed with larger number (worse)
         # Low seed is seed with smaller number (better team)
         highseed = self.team1

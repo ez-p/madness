@@ -42,7 +42,17 @@ class Tournament:
         self.results = self._run(self.madness)
         return self.results
 
-    def _run(self, madness):
+    def fixup(self, finalist):
+        # Check if user specified a specific winner/loser and fixup
+        # the sf flag appropiately
+        if finalist[0].sf == 2 and finalist[1].sf == 1:
+            # User wants finalist[0] to lose
+            finalist[1].sf = 3
+        if finalist[1].sf == 2 and finalist[0].sf == 1:
+            # User wants finalist[1] to lose
+            finalist[0].sf = 3
+
+    def _run(self, madness, winner=None, second=None):
         results = {'year':self.year,
                    'south':None,
                    'west':None,
@@ -63,6 +73,7 @@ class Tournament:
         all_regions = data.all_regions(self.year)
         for key in all_regions:
             r = region.Region(key, all_regions[key], self.algorithm)
+            r.set_sf(winner, second) 
             # Winner of region goes to final four
             final_four[key] = r(madness)
             results[key] = r
@@ -74,6 +85,7 @@ class Tournament:
 
         finalist = (semis[0]()[0], semis[1]()[0])
 
+        self.fixup(finalist)
         championship = self.algorithm(finalist, madness)
         champion,loser = championship()
 
@@ -89,42 +101,9 @@ class Tournament:
         return results
 
     def run_specific(self):
-        count = 1
-        results = self._run(self.madness)
+        results = self._run(self.madness, self.winner, self.second)
         champion = results['champion']
         finalist = results['finalist']
         loser = results['2nd_place']
 
-        if not self.second:
-            # Just winner specified
-            while champion.name != self.winner:
-                count += 1
-                results = self._run(self.madness)
-                champion = results['champion']
-                finalist = results['finalist']
-                loser = results['2nd_place']
-                if not count % 50000:
-                    print "{} itertions.".format(count)
-        elif not self.winner:
-            # Just second specified
-            while loser.name != self.second:
-                count += 1
-                results = self._run(self.madness)
-                champion = results['champion']
-                finalist = results['finalist']
-                loser = results['2nd_place']
-                if not count % 50000:
-                    print "{} itertions.".format(count)
-        else:
-            # Winner and second specified
-            while champion.name != self.winner or loser.name != self.second:
-                count += 1
-                results = self._run(self.madness)
-                champion = results['champion']
-                finalist = results['finalist']
-                loser = results['2nd_place']
-                if not count % 50000:
-                    print "{} itertions.".format(count)
-
-        print "Result found in {} iterations.".format(count)
         return results

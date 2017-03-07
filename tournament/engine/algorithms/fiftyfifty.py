@@ -19,6 +19,14 @@ class FiftyFifty(Matchup):
         self.madness = madness
 
     def _play(self, madness):
+        # See if superclass wants to handle the matchup
+        status, winner, loser = Matchup.base_play(self.team1, self.team2)
+        if status:
+            # Superclass handled the matchup
+            self.winner = winner
+            self.loser = loser
+            return (self.winner, self.loser)
+
         seq = [1,2]
         val = random.choice(seq)
         if val == 1:

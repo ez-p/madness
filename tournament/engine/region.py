@@ -37,3 +37,14 @@ class Region:
         game7 = (team.Team(teams[7], sregion, 7), team.Team(teams[10], sregion, 10))
         game8 = (team.Team(teams[2], sregion, 2), team.Team(teams[15], sregion, 15))
         self.matchups = [(game1, game2), (game3, game4), (game5, game6), (game7, game8)]
+
+    def set_sf(self, winner, second):
+        for matchup in self.matchups:
+            for game in matchup:
+                for team in game:
+                    if team.name == winner:
+                        print "found winner"
+                        team.sf = 3
+                    if team.name == second:
+                        print "found second"
+                        team.sf = 2
