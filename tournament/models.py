@@ -50,7 +50,7 @@ class Algorithm(models.Model):
 ## **********************************************
 class Options(models.Model):
     year = models.ForeignKey(Year, blank=False, default='')
-    madness = models.IntegerField(default=1)
+    madness = models.PositiveIntegerField(default=1)
     winner = models.ForeignKey(Team, blank=True, null=True, related_name="winner")
     second = models.ForeignKey(Team, blank=True, null=True, related_name="second")
     algorithm = models.ForeignKey(Algorithm)
