@@ -33,7 +33,9 @@ def print_stats(results):
 
 class Stats:
     # 300,000 seems to be the limit without a crash on macbook pro
-    def __init__(self, winner, second, madness, algorithm, iterations=300000):
+    def __init__(self, year, winner, second, madness, algorithm,
+                 iterations=300000):
+        self.year = year
         self.winner = winner
         self.second = second
         self.madness = madness
@@ -59,7 +61,8 @@ class Stats:
         for i in range(self.iterations):
             if i and not i % 5000:
                 print "Completed {} iterations.".format(i)
-            t = tourney.Tournament(self.winner, self.second, self.madness, self.algorithm)
+            t = tourney.Tournament(self.year, self.winner, self.second,
+                                   self.madness, self.algorithm)
             self.results.append(t())
         done = datetime.datetime.now()
         duration = done-start
@@ -73,7 +76,7 @@ class Stats:
         upset_total = 0
         print "\nCalculating upsets..."
         for r in self.results:
-            upset_total += upsets(r)
+            upset_total += upsets(self.year, r)
         average = upset_total/self.iterations
         self._print("Average upsets: {}\n".format(average))
         self.print_winners()

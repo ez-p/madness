@@ -86,8 +86,8 @@ class SeedOddsMatchup(Matchup):
 
     def _play(self, madness):
         # See if superclass wants to handle the matchup
-        status, self.winner, self.loser = Matchup.base_play(self.team1,
-                                                            self.team2)
+        status, self.winner, self.loser = Matchup.base_play(self.team1['team'],
+                                                            self.team2['team'])
         if status:
             # Superclass handled the matchup
             return (self.winner, self.loser)

@@ -20,7 +20,7 @@ class FiftyFifty(Matchup):
 
     def _play(self, madness):
         # See if superclass wants to handle the matchup
-        status, winner, loser = Matchup.base_play(self.team1, self.team2)
+        status, winner, loser = Matchup.base_play(self.teams[0], self.teams[1])
         if status:
             # Superclass handled the matchup
             self.winner = winner

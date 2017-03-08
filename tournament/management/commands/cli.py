@@ -179,7 +179,7 @@ def main():
         sys.exit()
 
     if stat_run:
-        s = stats.Stats(winner, second, madness, engine, iterations)
+        s = stats.Stats(year, winner, second, madness, engine, iterations)
         s.run()
         sys.exit(0)
 
@@ -187,7 +187,7 @@ def main():
     results = tourney()
 
     printer = Printer(tourney, print_to_file)
-    printer.print_to_file()
+    printer.print_to_file(year)
     printer.print_to_screen()
     stats.print_stats(results)
     
@@ -225,7 +225,7 @@ class Command(BaseCommand):
             sys.exit()
 
         if iterations:
-            s = stats.Stats(winner, second, madness, engine, iterations)
+            s = stats.Stats(year, winner, second, madness, engine, iterations)
             s.run()
             sys.exit(0)
 
@@ -235,7 +235,7 @@ class Command(BaseCommand):
         print "Execution time: {}".format(time.time() - start)
 
         printer = Printer(tourney, options['file'])
-        printer.print_to_file()
+        printer.print_to_file(year)
         printer.print_to_screen()
         stats.print_stats(results)
 

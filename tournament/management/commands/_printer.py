@@ -26,8 +26,8 @@ class Printer:
         f.write("Round {}\n".format(round.number))
         f.write("--------\n")
         for match in round.results:
-            f.write("{} vs {}: {}\n".format(match.team1['team'],
-                                            match.team2['team'],
+            f.write("{} vs {}: {}\n".format(match.teams[0],
+                                            match.teams[1],
                                             match.winner))
 
     def print_region(self, f, region):
@@ -52,12 +52,11 @@ class Printer:
         f.write("===== Champion ({}) =====\n".format(results['year']))
         f.write("{}".format(results['champion']))
     
-
-    def print_to_file(self):
+    def print_to_file(self, year):
         if not self.to_file:
             return
         with open(self.make_file_name(), 'a') as f:
-            for r in data.all_regions():
+            for r in data.all_regions(year):
                 self.print_region(f, self.results[r])
                 f.write("\n")
             self.print_final_four(f, self.results['final_four'])
