@@ -37,7 +37,7 @@ south = {1:{'name':'North Carolina','power':0},
          8:{'name':'Arkansas', 'power':0},
          9:{'name':'Seton Hall', 'power':0},
          10:{'name':'Wichita St', 'power':0},
-         11:{'name':'Kansas-state or Wake Forest', 'power':0},
+         11:{'name':'Kansas-St or Wake Forest', 'power':0},
          12:{'name':'Middle Tenn', 'power':0},
          13:{'name':'Winthrop', 'power':0},
          14:{'name':'Kent St', 'power':0},
@@ -93,7 +93,7 @@ midwest = {1:{'name':'Kansas', 'power':1},
            13:{'name':'Vermont', 'power':0},
            14:{'name':'Iona', 'power':0},
            15:{'name':'Jacksonville St', 'power':0},
-           16:{'name':'Texas S','power':0}}
+           16:{'name':'NC Central or UC Davis','power':0}}
 
 # What are the regions
 all_regions = {'south':south,
