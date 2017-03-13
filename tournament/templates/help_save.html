@@ -2,6 +2,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2 style="font-weight:bold;">Saving Brackets</h2>
-<p>You can save a bracket for later viewing using the <b>Keep</b> button.  You can view your saved tournaments
-using the <a href={% url 'my-brackets' %}>My Brackets</a> page.
+<h3 style="font-weight:bold;">Login</h3>
+<p>First, ensure you have created a user account and are logged in.  If the <b>Keep</b> button is disabled, you are not logged in.</p>
+<h3 style="font-weight:bold;">Save</h3>
+<p>After logging in, you can save a bracket for later viewing using the <b>Keep</b> button.  You can view your saved tournaments
+using the <a href={% url 'my-brackets' %}>My Brackets</a> page.</p>
+<h3 style="font-weight:bold;">Bookmarks</h3>
+<p>Another option is to simply bookmark individual tournaments using your browser.</p>
 {% endblock %}
