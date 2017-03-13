@@ -21,6 +21,7 @@ class Command(BaseCommand):
     def import_years(self):
         import _data_2015 as data2015
         import _data_2016 as data2016
+        import _data_2017 as data2017
 
         y = Year(year=data2015.year)
         y.save()
@@ -28,7 +29,10 @@ class Command(BaseCommand):
         y = Year(year=data2016.year)
         y.save()
 
-        return [data2015, data2016]
+        y = Year(year=data2017.year)
+        y.save()
+
+        return [data2015, data2016, data2017]
 
     # Import region data
     def import_regions(self, data):
