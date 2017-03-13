@@ -119,7 +119,8 @@ def _save_tournament(eng_results, option_id=None):
 
 def _get_default_year(request):
     year = None
-    year_cookie = request.COOKIES.get('year')
+    # Each year when adding new year data, rename the cookie
+    year_cookie = request.COOKIES.get('year2')
     if not year_cookie:
         return models.Year.objects.get(year=settings.DEFAULT_YEAR)
     else:
