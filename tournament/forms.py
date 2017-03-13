@@ -21,8 +21,8 @@ class OptionsForm(forms.ModelForm):
 
         self.year = models.Year.objects.get(year=year)
         teams = models.Team.objects.filter(year=self.year)
-        self.fields['winner'].queryset = teams.order_by('region', 'name')
-        self.fields['second'].queryset = teams.order_by('region', 'name')
+        self.fields['winner'].queryset = teams.filter(seed__lt=5).order_by('region', 'name')
+        self.fields['second'].queryset = teams.filter(seed__lt=5).order_by('region', 'name')
     
     def _find_region(self, year, name):
         all_regions_cache = data.all_regions(year)
